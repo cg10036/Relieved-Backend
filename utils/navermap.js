@@ -18,7 +18,6 @@ const setNNB = async () => {
 setNNB();
 
 const getWalk = async (...places) => {
-  await setNNB();
   let res = await fetch(
     `https://map.naver.com/p/api/directions/walk?o=all&l=${encodeURIComponent(
       places
