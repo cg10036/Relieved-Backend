@@ -43,7 +43,7 @@ const getWalk = async (...places) => {
     }
   );
   let json = await res.json();
-  console.log(json);
+  //   console.log(json);
   return json.routes[0];
 };
 
