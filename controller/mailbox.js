@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-const jsonData = JSON.parse(fs.readFileSync("mailbox.json"));
+const jsonData = JSON.parse(fs.readFileSync("json/mailbox.json"));
 const placesData = jsonData.DATA;
 
 const mailbox = (req, res) => {

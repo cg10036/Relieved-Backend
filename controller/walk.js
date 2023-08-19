@@ -1,7 +1,7 @@
 const fs = require("fs");
 const navermap = require("../utils/navermap");
 
-let data = JSON.parse(fs.readFileSync("safe.json"))["DATA"];
+let data = JSON.parse(fs.readFileSync("json/safe.json"))["DATA"];
 
 const getDist = (x1, y1, x2, y2) =>
   Math.sqrt(
