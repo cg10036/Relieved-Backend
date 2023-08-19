@@ -15,9 +15,9 @@ const setNNB = async () => {
   });
   NNB = resp.headers.raw()["set-cookie"].map((e) => e.split(";")[0])[0];
 };
-setNNB();
 
 const getWalk = async (...places) => {
+  await setNNB();
   let res = await fetch(
     `https://map.naver.com/p/api/directions/walk?o=all&l=${encodeURIComponent(
       places
