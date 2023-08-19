@@ -70,7 +70,7 @@ const walk = async (req, res) => {
           safe[i].longitude,
           safe[i + 1].latitude,
           safe[i + 1].longitude
-        ) < 0.002
+        ) < 0.005
       ) {
         if (safe[i].dist < safe[i + 1].dist) {
           safe.splice(i + 1, 1);
