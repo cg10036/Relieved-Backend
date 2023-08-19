@@ -60,22 +60,27 @@ const walk = async (req, res) => {
   ) {
     return res.status(400).json({ reason: "WRONG_BODY_TYPE" });
   }
-  let walk = await navermap.getWalk(from, to);
-  let safe = getSafePlaces(walk);
-  if (safe.length > 5) {
-    safe = safe.slice(0, 5);
-  }
+  try {
+    let walk = await navermap.getWalk(from, to);
+    let safe = getSafePlaces(walk);
+    if (safe.length > 5) {
+      safe = safe.slice(0, 5);
+    }
 
-  let result = await navermap.getWalk(
-    from,
-    ...safe.map((e) => ({
-      lat: e.latitude,
-      lng: e.longitude,
-      name: e.remark,
-    })),
-    to
-  );
-  return res.json({ safe, result });
+    let result = await navermap.getWalk(
+      from,
+      ...safe.map((e) => ({
+        lat: e.latitude,
+        lng: e.longitude,
+        name: e.remark,
+      })),
+      to
+    );
+    return res.json({ safe, result });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Interval Server Error");
+  }
 };
 
 module.exports = {
