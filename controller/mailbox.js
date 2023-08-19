@@ -20,64 +20,66 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 const mailbox = (req, res) => {
-  try {
-    let { box: userBox, lat: userLatitude, lng: userLongitude } = req.body; // {box: ..., lat: ..., lng: ...}
+  // try {
+  return res.json(placesData);
 
-    const nearbyPlaces = placesData.filter((place) => {
-      const latitude = parseFloat(place.wgsxpt);
-      const longitude = parseFloat(place.wgsypt);
+  // let { box: userBox, lat: userLatitude, lng: userLongitude } = req.body; // {box: ..., lat: ..., lng: ...}
 
-      // const distance = calculateDistance(
-      //   userLatitude,
-      //   userLongitude,
-      //   latitude,
-      //   longitude
-      // );
-      // return distance < 1.0; // 1km 이내의 장소
+  // const nearbyPlaces = placesData.filter((place) => {
+  //   const latitude = parseFloat(place.wgsxpt);
+  //   const longitude = parseFloat(place.wgsypt);
 
-      return (
-        userBox[0].lat <= latitude &&
-        latitude <= userBox[1].lat &&
-        userBox[0].lng <= longitude &&
-        longitude <= userBox[1].lng
-      );
-    });
-    nearbyPlaces.sort((a, b) => {
-      return (
-        calculateDistance(
-          userLatitude,
-          userLongitude,
-          parseFloat(a.wgsxpt),
-          parseFloat(a.wgsypt)
-        ) -
-        calculateDistance(
-          userLatitude,
-          userLongitude,
-          parseFloat(b.wgsxpt),
-          parseFloat(b.wgsypt)
-        )
-      );
-    });
+  //   // const distance = calculateDistance(
+  //   //   userLatitude,
+  //   //   userLongitude,
+  //   //   latitude,
+  //   //   longitude
+  //   // );
+  //   // return distance < 1.0; // 1km 이내의 장소
 
-    // nearbyPlaces.forEach((place) => {
-    //   const latitude = parseFloat(place.wgsxpt);
-    //   const longitude = parseFloat(place.wgsypt);
+  //   return (
+  //     userBox[0].lat <= latitude &&
+  //     latitude <= userBox[1].lat &&
+  //     userBox[0].lng <= longitude &&
+  //     longitude <= userBox[1].lng
+  //   );
+  // });
+  // nearbyPlaces.sort((a, b) => {
+  //   return (
+  //     calculateDistance(
+  //       userLatitude,
+  //       userLongitude,
+  //       parseFloat(a.wgsxpt),
+  //       parseFloat(a.wgsypt)
+  //     ) -
+  //     calculateDistance(
+  //       userLatitude,
+  //       userLongitude,
+  //       parseFloat(b.wgsxpt),
+  //       parseFloat(b.wgsypt)
+  //     )
+  //   );
+  // });
 
-    //   console.log("장소명:", place.ansiminm);
-    //   console.log("주소:", place.addrdetail || place.ansimiaddr);
-    //   console.log("위도:", latitude);
-    //   console.log("경도:", longitude);
-    //   console.log(
-    //     "거리 (km):",
-    //     calculateDistance(userLatitude, userLongitude, latitude, longitude)
-    //   );
-    //   console.log("- - - - - - - - - - - - - - ");
-    // });
-    return res.json(nearbyPlaces);
-  } catch (error) {
-    console.error("Error:", error);
-    return res.status(500).send("Interval Server Error");
-  }
+  // // nearbyPlaces.forEach((place) => {
+  // //   const latitude = parseFloat(place.wgsxpt);
+  // //   const longitude = parseFloat(place.wgsypt);
+
+  // //   console.log("장소명:", place.ansiminm);
+  // //   console.log("주소:", place.addrdetail || place.ansimiaddr);
+  // //   console.log("위도:", latitude);
+  // //   console.log("경도:", longitude);
+  // //   console.log(
+  // //     "거리 (km):",
+  // //     calculateDistance(userLatitude, userLongitude, latitude, longitude)
+  // //   );
+  // //   console.log("- - - - - - - - - - - - - - ");
+  // // });
+  // return res.json(nearbyPlaces);
+  // } catch (error) {
+  //   console.error("Error:", error);
+  //   return res.status(500).send("Interval Server Error");
+  // }
 };
 
 module.exports = {
