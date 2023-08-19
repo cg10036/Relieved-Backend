@@ -15,9 +15,6 @@ const getSafePlaces = (walk) => {
   for (let leg of walk.legs) {
     for (let step of leg.steps) {
       if (!step.path) continue;
-      // 0.1: 10km
-      // 0.01: 1km
-      // 0.001: 100m
       let positions = step.path.split(" ").map((e) => {
         let tmp = e.split(",");
         return { lat: tmp[1], lng: tmp[0] };
@@ -25,6 +22,7 @@ const getSafePlaces = (walk) => {
       for (let pos of positions) {
         for (let place of data) {
           let dist = getDist(place.latitude, place.longitude, pos.lat, pos.lng);
+          // 0.1: 10km, 0.01: 1km, 0.001: 100m
           if (dist <= 0.002) {
             if (!visit[place.service_id]) {
               safe.push({ ...place, dist });

@@ -5,15 +5,6 @@ const getReport = (req, res) => {
     if (err) {
       return res.status(500).send("Interval Server Error");
     }
-    // rows:
-    // [
-    //     {
-    //         "id": 1, // Primary Key
-    //         "lat": 37.57189607827978, // 위도
-    //         "lng": 127.00823297863074, // 경도
-    //         "detail": "test" // 신고 내용
-    //     }
-    // ]
     return res.json(rows);
   });
 };
