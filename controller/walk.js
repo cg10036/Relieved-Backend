@@ -61,6 +61,25 @@ const walk = async (req, res) => {
   try {
     let walk = await navermap.getWalk(from, to);
     let safe = getSafePlaces(walk);
+
+    // 0.1: 10km, 0.01: 1km, 0.001: 100m
+    for (let i = 0; i < safe.length - 1; i++) {
+      if (
+        getDist(
+          safe[i].latitude,
+          safe[i].longitude,
+          safe[i + 1].latitude,
+          safe[i + 1].longitude
+        ) < 0.002
+      ) {
+        if (safe[i].dist < safe[i + 1].dist) {
+          safe.splice(i + 1, 1);
+        } else {
+          safe.splice(i, 1);
+        }
+      }
+    }
+
     if (safe.length > 5) {
       safe = safe.slice(0, 5);
     }
